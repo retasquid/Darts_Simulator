@@ -96,5 +96,5 @@ int main(){
         }
         cout<<"score J2 : "<<scor2<<endl;
     }while(1);
-    cout<<"FIN DE GAME";
+    cout<<"GAME OVER";
 }
