@@ -1,4 +1,5 @@
 // du texte qui sert à rien
+// ok
 
 #include<iostream>
 #include<iomanip>
