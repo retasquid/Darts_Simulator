@@ -1,3 +1,5 @@
+// du texte qui sert à rien
+
 #include<iostream>
 #include<iomanip>
 #include<math.h>
