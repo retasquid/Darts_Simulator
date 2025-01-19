@@ -1,10 +1,4 @@
-// du texte qui sert à rien
-// ok
-
-#include<iostream>
-#include<iomanip>
-#include<math.h>
-using namespace std;
+#include"cible.h"
 
 int score(float p,float arg){
     int score;
@@ -40,7 +34,7 @@ int score(float p,float arg){
     }
     return score;
 }
-int main(){
+void cible(){
     float x,y,p,O;
     const float pmax = 225.5 ;
     int scor1=101;
@@ -58,7 +52,7 @@ int main(){
             if(y<0)O=-acos(x/p);
             if(y>=0)O=acos(x/p);
         }
-        cout<<"p : "<<p<<"\nO : "<<O<<endl;
+        cout<<"p : "<<p<<"\nO : "<<O<<"\n";
         scor1-=score(p,O);
         if(scor1==1){
             cout<<"J1 a perdu\n";
@@ -69,7 +63,7 @@ int main(){
             cout<<"J1 GAGNE\n";
             break;
         }
-        cout<<"score J1 : "<<scor1<<endl;
+        cout<<"score J1 : "<<scor1<<"\n";
 
         cout<<"\nJ2, ou avez vous tire?\nx : ";
         cin>>x;
@@ -83,7 +77,7 @@ int main(){
             if(y<0)O=-acos(x/p);
             if(y>=0)O=acos(x/p);
         }
-        cout<<"p : "<<p<<"\nO : "<<O<<endl;
+        cout<<"p : "<<p<<"\nO : "<<O<<"\n";
         scor2-=score(p,O);
         if(scor2==1){
             cout<<"J2 a perdu\n";
@@ -94,7 +88,7 @@ int main(){
             cout<<"J2 GAGNE\n";
             break;
         }
-        cout<<"score J2 : "<<scor2<<endl;
+        cout<<"score J2 : "<<scor2<<"\n";
     }while(1);
     cout<<"GAME OVER";
 }
