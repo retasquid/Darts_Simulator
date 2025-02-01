@@ -1,12 +1,12 @@
 #include"cible.h"
 
-int score(float p,float arg){
+int points(float p,float arg){
     int score;
-    if(p<=6.35){
+    if(p<=0.635){
         score=50;
-    }else if(p>6.35 and p<=15.9){
+    }else if(p>0.635 and p<=1.59){
         score=25;
-    }else if(p>170){
+    }else if(p>17){
         score=0;
     }else{
         if(arg>=-0.157 and arg < 0.157)score=6;
@@ -29,12 +29,23 @@ int score(float p,float arg){
         if(arg<-2.041 and arg >= -2.355)score=2;
         if(arg<-2.355 and arg >= -2.669)score=15;
         if(arg<-2.669 and arg >= -2.983)score=10;
-        if(p<=107.4 and p>=99.4)score=score*3;
-        if(p<=170 and p>=162)score=score*2;
+        if(p<=10.74 and p>=9.94)score=score*3;
+        if(p<=17 and p>=16.2)score=score*2;
     }
     return score;
 }
-void cible(){
+float module(float x, float y){
+    return sqrt(x*x+y*y);
+}
+float arg(float x, float y){
+    float m=module(x,y);
+    if(m==0)return 0;
+    if(y<0)return (-acos(x/m));
+    if(y>=0)return (acos(x/m));
+    return 0;
+}
+
+/*void cible(){
     float x,y,p,O;
     const float pmax = 225.5 ;
     int scor1=101;
@@ -46,19 +57,14 @@ void cible(){
         cin>>y;
         p=sqrt(x*x+y*y);
         if(p>pmax)scor1=0;
-        if(p==0){
-            O=0;
-        }else{
-            if(y<0)O=-acos(x/p);
-            if(y>=0)O=acos(x/p);
-        }
+        
         cout<<"p : "<<p<<"\nO : "<<O<<"\n";
-        scor1-=score(p,O);
+        scor1-=points(p,O);
         if(scor1==1){
             cout<<"J1 a perdu\n";
             break;
         }else if(scor1<0){
-            scor1+=score(p,O);
+            scor1+=points(p,O);
         }else if(scor1==0){
             cout<<"J1 GAGNE\n";
             break;
@@ -78,12 +84,12 @@ void cible(){
             if(y>=0)O=acos(x/p);
         }
         cout<<"p : "<<p<<"\nO : "<<O<<"\n";
-        scor2-=score(p,O);
+        scor2-=points(p,O);
         if(scor2==1){
             cout<<"J2 a perdu\n";
             break;
         }else if(scor2<0){
-            scor2+=score(p,O);
+            scor2+=points(p,O);
         }else if(scor2==0){
             cout<<"J2 GAGNE\n";
             break;
@@ -91,4 +97,4 @@ void cible(){
         cout<<"score J2 : "<<scor2<<"\n";
     }while(1);
     cout<<"GAME OVER";
-}
+}*/
