@@ -30,7 +30,15 @@ int points(float p,float arg){
         if(arg<-2.355 and arg >= -2.669)score=15;
         if(arg<-2.669 and arg >= -2.983)score=10;
         if(p<=10.74 and p>=9.94)score=score*3;
+            {
+                cout<<"point triple\n";
+                score=score*3;
+            }
         if(p<=17 and p>=16.2)score=score*2;
+            {
+                score=score*2;
+                cout<<"point double\n";
+            }
     }
     return score;
 }
