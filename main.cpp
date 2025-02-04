@@ -7,12 +7,11 @@ using namespace std;
 using namespace sf;
 
 int main(){
-    bool mode = 0; //Mode 0 = simple; 1 = avancé
-    unsigned int window_wide = 1500;
-    unsigned int window_height = 750;
+    bool mode = 1; //Mode 0 = simple; 1 = avancé
+    unsigned int window_wide = 1920;
+    unsigned int window_height = 1080;
     float distance_cible;
     //1m=250px 
-
     lancer j1(1);
     lancer j2(2);
     lancer joueur = j1;
@@ -60,9 +59,9 @@ int main(){
     window->setVisible(1);
     joueur.SetScore(joueur.Zt(joueur.GetTvol())/2.5,joueur.Yt(joueur.GetTvol())/2.5);
     cout<<"x : "<<(joueur.Zt(joueur.GetTvol()))*0.004<<"y : "<<(joueur.Yt(joueur.GetTvol()))*0.004;
-    titre.setString("Score du joueur : "+to_string(joueur.GetScore())+"pts");
+    titre.setString("Appuillez sur (espace) pour lancer et sur (j) pour changer de joueur :\nScore du joueur : "+to_string(joueur.GetScore())+"pts");
 
-    cout<<"\nAppuillez sur (espace) pour lancer : \nAppuillez sur (j) pour changer de joueur :\n";
+    cout<<"\nAppuillez sur (espace) pour lancer : \nAppuillez sur (j) pour changer de joueur :\n\n";
     while(window->isOpen()){
         while(const optional event = window->pollEvent()){
             if(event->is<Event::Closed>()){
@@ -92,7 +91,7 @@ int main(){
                     window->setVisible(1);
                     joueur.SetScore(joueur.Zt(joueur.GetTvol())/2.5,joueur.Yt(joueur.GetTvol())/2.5);
                     cout<<"x : "<<(joueur.Zt(joueur.GetTvol()))*0.004<<"y : "<<(joueur.Yt(joueur.GetTvol()))*0.004;
-                    titre.setString("Score du joueur "+to_string(joueur.ID())+" : "+to_string(joueur.GetScore())+"pts");
+                    titre.setString("Appuillez sur (espace) pour lancer et sur (j) pour changer de joueur :\nScore du joueur "+to_string(joueur.ID())+" : "+to_string(joueur.GetScore())+"pts");
                     }
             }
         }
