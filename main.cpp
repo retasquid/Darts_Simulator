@@ -46,6 +46,11 @@ int main(){
     cible.setScale({0.8,1});
     cible.setTexture(&texture);
 
+     CircleShape cibleface(42.5);
+    cibleface.setOrigin({42.5,42.5});
+    cibleface.setPointCount(50);
+    cibleface.setTexture(&texture);
+
     //Logo dart sim
     cout<<"\n\n#####    ####   #####   ######     ####   ######  ##   ##\n##  ##  ##  ##  ##  ##    ##      ##        ##    ### ###\n##  ##  ######  #####     ##       ####     ##    ## # ##\n##  ##  ##  ##  ##  ##    ##          ##    ##    ##   ##\n#####   ##  ##  ##  ##    ##       ####   ######  ##   ##\n\n\n";
     //demande distance cible
