@@ -46,10 +46,11 @@ int main(){
     cible.setScale({0.8,1});
     cible.setTexture(&texture);
 
-     CircleShape cibleface(42.5);
-    cibleface.setOrigin({42.5,42.5});
+    CircleShape cibleface(425);
+    cibleface.setOrigin({425,425});
     cibleface.setPointCount(50);
     cibleface.setTexture(&texture);
+    cibleface.setPosition({(float)window_wide*0.85,(float)window_height*0.15});
 
     //Logo dart sim
     cout<<"\n\n#####    ####   #####   ######     ####   ######  ##   ##\n##  ##  ##  ##  ##  ##    ##      ##        ##    ### ###\n##  ##  ######  #####     ##       ####     ##    ## # ##\n##  ##  ##  ##  ##  ##    ##          ##    ##    ##   ##\n#####   ##  ##  ##  ##    ##       ####   ######  ##   ##\n\n\n";
