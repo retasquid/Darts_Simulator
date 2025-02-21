@@ -52,6 +52,11 @@ int main(){
     cibleface.setTexture(&texture);
     cibleface.setPosition({(float)window_wide*0.85,(float)window_height*0.15});
 
+    CircleShape flechetteface(10.f,100);
+    flechetteface.setOrigin({10,10});
+    flechetteface.setPosition({0,(float)window_height-10});
+    flechetteface.setScale({1,0.5});
+
     //Logo dart sim
     cout<<"\n\n#####    ####   #####   ######     ####   ######  ##   ##\n##  ##  ##  ##  ##  ##    ##      ##        ##    ### ###\n##  ##  ######  #####     ##       ####     ##    ## # ##\n##  ##  ##  ##  ##  ##    ##          ##    ##    ##   ##\n#####   ##  ##  ##  ##    ##       ####   ######  ##   ##\n\n\n";
     //demande distance cible
@@ -98,6 +103,7 @@ int main(){
                     joueur.SetScore(joueur.Zt(joueur.GetTvol())/2.5,joueur.Yt(joueur.GetTvol())/2.5);
                     cout<<"x : "<<(joueur.Zt(joueur.GetTvol()))*0.004<<"y : "<<(joueur.Yt(joueur.GetTvol()))*0.004;
                     titre.setString("Appuillez sur (espace) pour lancer et sur (j) pour changer de joueur :\nScore du joueur "+to_string(joueur.ID())+" : "+to_string(joueur.GetScore())+"pts");
+                    joueur.SetScore(joueur.Xt(joueur.GetTvol())/2.5,joueur.Yt(joueur.GetTvol())/2.5);
                     }
             }
         }
