@@ -7,11 +7,14 @@ using namespace std;
 using namespace sf;
 
 int main(){
-    bool mode = 1; //Mode 0 = simple; 1 = avancé
+    const bool mode = 0; //Mode 0 = simple; 1 = avancé
     unsigned int window_wide = 1920;
     unsigned int window_height = 1080;
-    float distance_cible;
-    //1m=250px 
+    const float distance_cible = scale_1m_to_px*2.37f;
+    const float x_cible_face = window_wide*0.85;
+    const float y_cible_face = window_height*0.2;
+    extern const unsigned short scale_1m_to_px;
+    bool condition_victoire = 0;
     lancer j1(1);
     lancer j2(2);
     lancer joueur = j1;
@@ -27,12 +30,11 @@ int main(){
     Font font;
     if(!font.openFromFile("Cosmetics/Nunito-Bold.ttf"))cerr<<"Erreur de chargement des polices.";
 
-    Text titre(font);
-    titre.setString("");
+    Text titre(font,"");
     titre.setPosition({10,10});
     titre.setFillColor(Color(0xFFFFFFA0));
-    
-    CircleShape flechette(10.f,100);
+
+    CircleShape flechette(10,100);
     flechette.setOrigin({10,10});
     flechette.setPosition({0,(float)window_height-10});
     flechette.setScale({1,0.5});
@@ -40,38 +42,32 @@ int main(){
     Texture texture;
     if (!texture.loadFromFile("Cosmetics/cible.png"))cerr<<"Erreur de chargement de la cible.";
 
-    CircleShape cible(42.5);
-    cible.setOrigin({42.5,42.5});
-    cible.setPointCount(50);
+    CircleShape cible(scale_1m_to_px*0.225,50);
+    cible.setOrigin({scale_1m_to_px*0.225f,scale_1m_to_px*0.225f});
     cible.setScale({0.8,1});
     cible.setTexture(&texture);
+    cible.setPosition({distance_cible,(float)window_height-(scale_1m_to_px*1.73f)});
 
-    CircleShape cibleface(425);
-    cibleface.setOrigin({425,425});
-    cibleface.setPointCount(50);
+    CircleShape cibleface(225.5,50);
+    cibleface.setOrigin({225.5,225.5});
     cibleface.setTexture(&texture);
-    cibleface.setPosition({(float)window_wide*0.85,(float)window_height*0.15});
+    cibleface.setPosition({x_cible_face, y_cible_face});
 
-    CircleShape flechetteface(10.f,100);
+    CircleShape flechetteface(10,30);
     flechetteface.setOrigin({10,10});
-    flechetteface.setPosition({0,(float)window_height-10});
-    flechetteface.setScale({1,0.5});
+    flechetteface.setFillColor(Color(0x3E2F5B9F));
+    flechetteface.setPosition({0,0});
 
     //Logo dart sim
     cout<<"\n\n#####    ####   #####   ######     ####   ######  ##   ##\n##  ##  ##  ##  ##  ##    ##      ##        ##    ### ###\n##  ##  ######  #####     ##       ####     ##    ## # ##\n##  ##  ##  ##  ##  ##    ##          ##    ##    ##   ##\n#####   ##  ##  ##  ##    ##       ####   ######  ##   ##\n\n\n";
     //demande distance cible
-    cout<<"A quelle distance est la cible(m) : ";
-    cin>>distance_cible;
-    distance_cible*=250;
-    float y_cible=(float)window_height-432.5;
-    cible.setPosition({distance_cible,y_cible});
-    
+    cout<<"------------------------------------\n";
+    cout<<"La cible est a une distance de 2.37m\n";
+    cout<<"------------------------------------\n";
     joueur.SetLaunch(distance_cible, mode);
     window->setVisible(1);
-    joueur.SetScore(joueur.Zt(joueur.GetTvol())/2.5,joueur.Yt(joueur.GetTvol())/2.5);
-    cout<<"x : "<<(joueur.Zt(joueur.GetTvol()))*0.004<<"y : "<<(joueur.Yt(joueur.GetTvol()))*0.004;
+    joueur.SetScore(joueur.Zt(joueur.GetTvol())/scale_1m_to_px,joueur.Yt(joueur.GetTvol())/scale_1m_to_px);
     titre.setString("Appuillez sur (espace) pour lancer et sur (j) pour changer de joueur :\nScore du joueur : "+to_string(joueur.GetScore())+"pts");
-
     cout<<"\nAppuillez sur (espace) pour lancer : \nAppuillez sur (j) pour changer de joueur :\n\n";
     while(window->isOpen()){
         while(const optional event = window->pollEvent()){
@@ -85,31 +81,42 @@ int main(){
                         flechette.setPosition({joueur.Xt(step),(window_height-joueur.Yt(step))});
                         window->draw(cible);
                         window->draw(flechette);
+                        window->draw(cibleface);
+                        window->draw(flechetteface);
                         window->display();
                     }
-                } 
+                    flechetteface.setPosition({(x_cible_face+joueur.Zt(joueur.GetTvol())),(y_cible_face-joueur.Yt(joueur.GetTvol())+scale_1m_to_px*1.73f)});
+                }
             }
             if(const auto* KeyPressed = event->getIf<Event::KeyPressed>()){
-                if(KeyPressed->scancode==Keyboard::Scancode::J){
+                if(KeyPressed->scancode==Keyboard::Scancode::J && !condition_victoire){
                     window->setVisible(0);
-                    cout<<"changement de joueur\n\n";
+                    cout<<"\nchangement de joueur\n\n";
                     if(joueur.ID()==j1.ID()){
+                        j1=joueur;
                         joueur=j2;
                     }else if(joueur.ID()==j2.ID()){
+                        j2=joueur;
                         joueur=j1;
                     }
                     joueur.SetLaunch(distance_cible, mode);
                     window->setVisible(1);
-                    joueur.SetScore(joueur.Zt(joueur.GetTvol())/2.5,joueur.Yt(joueur.GetTvol())/2.5);
-                    cout<<"x : "<<(joueur.Zt(joueur.GetTvol()))*0.004<<"y : "<<(joueur.Yt(joueur.GetTvol()))*0.004;
-                    titre.setString("Appuillez sur (espace) pour lancer et sur (j) pour changer de joueur :\nScore du joueur "+to_string(joueur.ID())+" : "+to_string(joueur.GetScore())+"pts");
-                    joueur.SetScore(joueur.Xt(joueur.GetTvol())/2.5,joueur.Yt(joueur.GetTvol())/2.5);
+                    condition_victoire = joueur.SetScore(joueur.Zt(joueur.GetTvol())/scale_1m_to_px,joueur.Yt(joueur.GetTvol())/scale_1m_to_px);
+                    if(condition_victoire){
+                        titre.setScale({1.5f,1.5f});
+                        titre.setPosition({30,(float)(window_height/2)});
+                        titre.setString("Le joueur "+to_string(joueur.ID())+" gagne la partie");
+                    }else{
+                        titre.setString("Appuyez sur (espace) pour lancer et sur (j) pour changer de joueur :\nScore du joueur "+to_string(joueur.ID())+" : "+to_string(joueur.GetScore())+"pts");
                     }
+                }
             }
         }
         window->clear();
         window->draw(titre);
         window->draw(cible);
+        window->draw(cibleface);
+        window->draw(flechetteface);
         window->display();  
-    }        
+    }
 }

@@ -5,9 +5,10 @@
 #include<ctime>
 #include<SFML/Graphics.hpp>
 
+const unsigned short scale_1m_to_px = 450;
+const float grav = 9.81*scale_1m_to_px;
+const float pi = 3.14159265;
 
-const float grav=9.81*250;
-const float pi=3.14159265;
 
 float RadToDeg(float rad);
 float DegToRad(float deg);
@@ -18,7 +19,7 @@ class lancer{
         lancer(short name){id = name;}
         void SetLaunch(float dist_cible, bool mode);
         void SetWind(float vent, float phiV, float alphaV);
-        void SetScore(float x, float y);
+        bool SetScore(float x, float y);
         float Xt(float t);
         float Yt(float t);
         float Zt(float t);
@@ -34,7 +35,7 @@ class lancer{
         float ventX=0;
         float ventY=0;
         float ventZ=0;
-        int score=501;
+        int score=50;
 };
 
 #endif

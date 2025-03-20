@@ -16,19 +16,19 @@ void lancer::SetLaunch(float dist_cible, bool mode){
         cin>>Alpha;
         cout<<"A quelle distance de la ligne de lance avez vous lance : \n";
         cin>>Xo;
-        x0=Xo*250;
+        x0=Xo*scale_1m_to_px;
     }else{
         Alpha=0;
         x0=0;
     }
     cout<<"A quelle hauteur initial avez vous lance : \n";
     cin>>Yo;
-    y0=Yo*250;
+    y0=Yo*scale_1m_to_px;
     phi=DegToRad(Phi);
     alpha=DegToRad(Alpha);
-    vitesseX=vitesse*cos(alpha)*cos(phi)*250;
-    vitesseY=vitesse*cos(alpha)*sin(phi)*250;
-    vitesseZ=vitesse*sin(alpha)*250;
+    vitesseX=vitesse*cos(alpha)*cos(phi)*scale_1m_to_px;
+    vitesseY=vitesse*cos(alpha)*sin(phi)*scale_1m_to_px;
+    vitesseZ=vitesse*sin(alpha)*scale_1m_to_px;
     Tmp_vol=(dist_cible-x0)/vitesseX;
 }
 void lancer::SetWind(float vent, float phiV, float alphaV){
@@ -56,8 +56,17 @@ float lancer::Zx(float x){
 float lancer::GetTvol(){
     return Tmp_vol;
 }
-void lancer::SetScore(float x, float y){
-    score-=points(module(x,y-173),arg(x,y-173));
+bool lancer::SetScore(float x, float y){
+    short tmp_score = points(module(x,y-1.73),arg(x,y-1.73));
+    if(tmp_score<score){
+        score-=tmp_score;
+        return 0;}
+    if(tmp_score==score){
+        score-=tmp_score;
+        return 1;}
+    return 0;
+
+
 }
 int lancer::GetScore(){
     return score;

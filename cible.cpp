@@ -2,11 +2,11 @@
 
 int points(float p,float arg){
     int score;
-    if(p<=0.635){
+    if(p<=0.00635){
         score=50;
-    }else if(p>0.635 and p<=1.59){
+    }else if(p>0.00635 and p<=0.0159){
         score=25;
-    }else if(p>17){
+    }else if(p>0.17){
         score=0;
     }else{
         if(arg>=-0.157 and arg < 0.157)score=6;
@@ -29,11 +29,11 @@ int points(float p,float arg){
         if(arg<-2.041 and arg >= -2.355)score=2;
         if(arg<-2.355 and arg >= -2.669)score=15;
         if(arg<-2.669 and arg >= -2.983)score=10;
-        if(p<=10.74 and p>=9.94){
+        if(p<=0.1074 and p>=0.0994){
             std::cout<<"point triple\n";
             score=score*3;
         }
-        if(p<=17 and p>=16.2){
+        if(p<=0.17 and p>=0.162){
             score=score*2;
             std::cout<<"point double\n";
         }
