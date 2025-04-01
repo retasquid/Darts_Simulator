@@ -11,8 +11,8 @@ int main(){
     unsigned int window_wide = 1920;
     unsigned int window_height = 1080;
     const float distance_cible = scale_1m_to_px*2.37f;
-    const float x_cible_face = window_wide*0.85;
-    const float y_cible_face = window_height*0.2;
+    const float x_cible_face = window_wide*0.85f;
+    const float y_cible_face = window_height*0.2f;
     extern const unsigned short scale_1m_to_px;
     bool condition_victoire = 0;
     lancer j1(1);
@@ -32,6 +32,10 @@ int main(){
 
     Text titre(font,"");
     titre.setPosition({10,10});
+    titre.setFillColor(Color(0xFFFFFFA0));
+
+    Text vitKm(font,"");
+    titre.setPosition({10,30});
     titre.setFillColor(Color(0xFFFFFFA0));
 
     CircleShape flechette(10,100);
@@ -61,13 +65,14 @@ int main(){
     //Logo dart sim
     cout<<"\n\n#####    ####   #####   ######     ####   ######  ##   ##\n##  ##  ##  ##  ##  ##    ##      ##        ##    ### ###\n##  ##  ######  #####     ##       ####     ##    ## # ##\n##  ##  ##  ##  ##  ##    ##          ##    ##    ##   ##\n#####   ##  ##  ##  ##    ##       ####   ######  ##   ##\n\n\n";
     //demande distance cible
-    cout<<"------------------------------------\n";
-    cout<<"La cible est a une distance de 2.37m\n";
-    cout<<"------------------------------------\n";
+    cout<<"  ------------------------------------\n";
+    cout<<"  La cible est a une distance de 2.37m\n";
+    cout<<"  ------------------------------------\n";
     joueur.SetLaunch(distance_cible, mode);
     window->setVisible(1);
     joueur.SetScore(joueur.Zt(joueur.GetTvol())/scale_1m_to_px,joueur.Yt(joueur.GetTvol())/scale_1m_to_px);
     titre.setString("Appuillez sur (espace) pour lancer et sur (j) pour changer de joueur :\nScore du joueur : "+to_string(joueur.GetScore())+"pts");
+    vitKm.setString("votre vitesse est de "+to_string(joueur.vitesseKm())+" km/h");
     cout<<"\nAppuillez sur (espace) pour lancer : \nAppuillez sur (j) pour changer de joueur :\n\n";
     while(window->isOpen()){
         while(const optional event = window->pollEvent()){
@@ -81,6 +86,7 @@ int main(){
                         flechette.setPosition({joueur.Xt(step),(window_height-joueur.Yt(step))});
                         window->draw(cible);
                         window->draw(flechette);
+                        window->draw(vitKm);
                         window->draw(cibleface);
                         window->draw(flechetteface);
                         window->display();
@@ -108,6 +114,7 @@ int main(){
                         titre.setString("Le joueur "+to_string(joueur.ID())+" gagne la partie");
                     }else{
                         titre.setString("Appuyez sur (espace) pour lancer et sur (j) pour changer de joueur :\nScore du joueur "+to_string(joueur.ID())+" : "+to_string(joueur.GetScore())+"pts");
+                        vitKm.setString("votre vitesse est de "+to_string(joueur.vitesseKm())+" km/h");
                     }
                 }
             }

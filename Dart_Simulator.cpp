@@ -3,12 +3,21 @@
 using std::cin, std::cout;
 
 void lancer::SetLaunch(float dist_cible, bool mode){
-    float Phi, Alpha, vitesse, Yo, Xo;
+    float Phi, Alpha, Yo, Xo;
+    srand(time(nullptr));
     cout<<"##==============##\n";
     cout<<"##   Joueur "<<id<<"   ##\n";
     cout<<"##==============##\n\n";
     cout<<"A quelle vitesse avez vous lance : \n";
-    cin>>vitesse;                    
+    cin>>vitesse;
+    while(1){
+        if(vitesse<=0){
+            cout<<"saisisez un nombre positif :";
+            cin>>vitesse;
+        }else{
+            break;
+        }
+    }
     cout<<"A quelle angle vertical avez vous lance : \n";
     cin>>Phi;
     if(mode){
@@ -57,7 +66,7 @@ float lancer::GetTvol(){
     return Tmp_vol;
 }
 bool lancer::SetScore(float x, float y){
-    short tmp_score = points(module(x,y-1.73),arg(x,y-1.73));
+    short tmp_score = probaScore()*points(module(x,y-1.73),arg(x,y-1.73));
     if(tmp_score<score){
         score-=tmp_score;
         return 0;}
@@ -65,14 +74,31 @@ bool lancer::SetScore(float x, float y){
         score-=tmp_score;
         return 1;}
     return 0;
-
-
 }
 int lancer::GetScore(){
     return score;
 }
 short lancer::ID(){
     return id;
+}
+int lancer::vitesseKm(){
+    return ((vitesseX*3.6f)/scale_1m_to_px);
+}
+bool lancer::probaScore(){
+    float xa=Xt(GetTvol()-0.01);
+    float ya=Yt(GetTvol()-0.01);
+    float xb=Xt(GetTvol());
+    float yb=Yt(GetTvol());
+    cout<<"Xa : "<<xa<<"Ya : "<<ya<<"Xb : "<<xb<<"Yb : "<<yb<<"\n";
+    float prob=(rand() % 1001)/1000.00;
+    cout<<"prob : "<<prob<<"\n";
+    float Pangle=(xb-xa)/sqrt((yb-ya)*(yb-ya)+(xb-xa)*(xb-xa));
+    cout<<"Pangle : "<<Pangle<<"\n";
+    float Pvitesse=1-pow(2,-vitesse/5.00);
+    cout<<"Pvitesse : "<<Pvitesse<<"\n";
+    if(prob<(Pangle*Pvitesse))return 1;
+    cout<<"\nVous avez rater votre tire \n";
+    return 0;
 }
 
 float RadToDeg(float rad){

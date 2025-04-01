@@ -3,6 +3,7 @@
 #include<iostream>
 #include<math.h>
 #include<ctime>
+#include<cstdlib>
 #include<SFML/Graphics.hpp>
 
 const unsigned short scale_1m_to_px = 450;
@@ -28,14 +29,16 @@ class lancer{
         float GetTvol();
         int GetScore();
         short ID();
+        int vitesseKm();
+        bool probaScore();
     private :
         short x0, y0, id;
         float alpha, phi;
-        float vitesseX, vitesseY, vitesseZ, Tmp_vol;
+        float vitesse, vitesseX, vitesseY, vitesseZ, Tmp_vol;
         float ventX=0;
         float ventY=0;
         float ventZ=0;
-        int score=50;
+        int score=100;
 };
 
 #endif
