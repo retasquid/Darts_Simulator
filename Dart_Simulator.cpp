@@ -21,10 +21,12 @@ void SetParameter(){
     cout<<"  Mode 3 : cible en 3D avec vent      \n";
     cout<<"  Mode 4 : cible en 3D avec vent fort \n";
     cout<<"  ------------------------------------\n";
+    //verificattion de saisie
     while(mode_jeux>4 || mode_jeux<0){
-        cout<<"  >Choisisez votre mode : ";
+        cout<<"  > Choisisez votre mode : ";
         cin>>mode_jeux;
-     }
+    }
+    //configuration du vent selon le mode
     switch (mode_jeux){
     case 0 :
         vitVent = 0;
@@ -35,7 +37,7 @@ void SetParameter(){
     case 1 :
         vitVent = rand()%25;
         alphaVent = (rand()%361)-180;
-        phiVent = 180-(rand()%361);
+        phiVent =  180-(rand()%361);
         cout<<"Le vent souffle a "<<vitVent*3.6<<" km/h aux angles alpha : "<<alphaVent<<"° et phi : "<<phiVent<<"°.\n";     
         return;
     
@@ -49,11 +51,11 @@ void SetParameter(){
         vitVent = rand()%25;
         alphaVent = (rand()%361)-180;
         phiVent = 180-(rand()%361);
-        cout<<"Le vent souffle a "<<vitVent*3.6<<" km/h aux angles alpha : "<<alphaVent<<"° et phi : "<<phiVent<<"°.";
+        cout<<"Le vent souffle a "<<vitVent*3.6<<" km/h aux angles alpha : "<<alphaVent<<"° et phi : "<<phiVent<<"°.\n";
         return;
     
     case 4 :
-        vitVent = rand()%40;
+        vitVent = rand()%41;
         alphaVent = (rand()%361)-180;
         phiVent = 180-(rand()%361);
         cout<<"Le vent souffle a "<<vitVent*3.6<<" km/h aux angles alpha : "<<alphaVent<<"° et phi : "<<phiVent<<"°.\n";      
@@ -71,9 +73,10 @@ void lancer::SetLaunch(){
     extern short mode_jeux;
     static float Phi, Alpha, Yo, Xo;
     static const float dist_cible = scale_1m_to_px*2.37f;
-    cout<<"##==============##\n";
-    cout<<"##   Joueur "<<id<<"   ##\n";
-    cout<<"##==============##\n\n";
+    cout<<"  ______________\n";
+    cout<<" /              \\ \n";
+    cout<<"|    Joueur "<<id<<"    |\n";
+    cout<<" \\______________/\n\n";
     cout<<"A quelle vitesse avez vous lance (m/s) : \n";
     cin>>vitesse;
     while(1){
@@ -106,21 +109,22 @@ void lancer::SetLaunch(){
     vitesseZ=vitesse*sin(alpha)*scale_1m_to_px;
     Tmp_vol=(dist_cible-x0)/vitesseX;
 }
-void lancer::SetWind(float vit_vent, float alphaV, float phiV){
-    float TMPa=DegToRad(alphaV);
-    float TMPp=DegToRad(phiV);
-    ventX=(K*vit_vent*vit_vent*cos(TMPa)*cos(TMPp)*scale_1m_to_px)/(2*0.02);
-    ventY=(K*vit_vent*vit_vent*cos(TMPa)*sin(TMPp)*scale_1m_to_px)/(2*0.02);
-    ventZ=(K*vit_vent*vit_vent*sin(TMPa)*scale_1m_to_px)/(2*0.02);
+void lancer::SetWind(){
+    extern short vitVent, alphaVent, phiVent;
+    float TMPa=DegToRad(alphaVent);
+    float TMPp=DegToRad(phiVent);
+    ventX=(K*vitVent*vitVent*cos(TMPa)*cos(TMPp)*scale_1m_to_px)/(2*0.02);
+    ventY=(K*vitVent*vitVent*cos(TMPa)*sin(TMPp)*scale_1m_to_px)/(2*0.02);
+    ventZ=(K*vitVent*vitVent*sin(TMPp)*scale_1m_to_px)/(2*0.02);
 }
 float lancer::Xt(float t){
-    return t*vitesseX+x0-ventX*t*t;
+    return t*vitesseX+x0+ventX*t*t;
 }
 float lancer::Yt(float t){
     return t*vitesseY-(grav*t*t)/2+y0-ventY*t*t;
 }
 float lancer::Zt(float t){
-    return t*vitesseZ-ventZ*t*t;
+    return t*vitesseZ+ventZ*t*t;
 }
 float lancer::Yx(float x){
     return (x-x0)*tan(phi)-(grav*(x-x0)*(x-x0))/(2*(vitesseX*vitesseX))+y0;
@@ -156,24 +160,15 @@ bool lancer::probaScore(){
     float xb=Xt(GetTvol());
     float yb=Yt(GetTvol());
     float prob=(rand() % 1001)/1000.00; //Création de la chance entre 0 et 1 à 3 chiffres significatifs
-    cout<<"prob : "<<prob<<"\n";
     float Pangle=(xb-xa)/sqrt((yb-ya)*(yb-ya)+(xb-xa)*(xb-xa));
-    cout<<"Pangle : "<<Pangle<<"\n";
     float Pvitesse=1-pow(2,-vitesse/5.00);
-    cout<<"Pvitesse : "<<Pvitesse<<"\n";
     if(prob<(Pangle*Pvitesse))return 1;     //test des 2 probabilitées cumulées
-    cout<<"\nVous avez rater votre tire \n";
     return 0;
 }
 
 float RadToDeg(float rad){
-    return (rad*180)/pi;
+    return (rad*180)/pi;        //convertion radian vers degré
 }
 float DegToRad(float deg){
-    return (deg*pi)/180;
-}
-void delay(int t){
-    std::time_t c_time = std::time(nullptr);
-    while(std::time(nullptr)-c_time<t){
-    }
+    return (deg*pi)/180;        //convertion degré vers radian
 }

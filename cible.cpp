@@ -1,5 +1,6 @@
 #include"cible.h"
 
+//attribution des points de la cible en fonction de la position
 int points(float p,float arg){
     int score;
     if(p<=0.00635){
@@ -40,6 +41,7 @@ int points(float p,float arg){
     }
     return score;
 }
+//convertion en coordonées polaire
 float module(float x, float y){
     return sqrt(x*x+y*y);
 }
