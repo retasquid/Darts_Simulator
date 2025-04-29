@@ -1,72 +1,78 @@
 # Darts Game Project
-Our project consists of developing a program capable of simulating dart throws and determining the landing position of these darts on a target, based on various conditions such as initial velocity, vertical and horizontal angles, as well as the respective positions of the player and the target. The objective is to perform all necessary calculations to simulate the arrow's path and, eventually, to use interfaces such as Dart Simulator to visualize the dart trajectories.
 
-# Tools
-For this purpose, we have chosen to use the C++ programming language and the SFML 3.0 library, Dart Simulator, for which installation instructions will be provided below. Additionally, for collaborative project management, we have used GitHub, which allows multiple developers to work simultaneously on the code, modify it, and share updates with other team members.
+Our project consists of developing a program capable of simulating dart throws and determining the landing position of darts on a target, based on various conditions such as initial velocity, vertical and horizontal angles, as well as the respective positions of the player and the target. The objective is to perform all necessary calculations to simulate the dart's path and, eventually, to use interfaces such as Dart Simulator to visualize the dart trajectories.
 
-# How to use
+## Tools
+
+For this purpose, we have chosen to use the C++ programming language and the SFML 3.0 library. Additionally, for collaborative project management, we have used GitHub, which allows multiple developers to work simultaneously on the code, modify it, and share updates with other team members.
+
+## How to Use
 
 ### Modes
 
-You can choose between 5 modes :
+You can choose between 5 modes:
 * 2D without wind
-*  2D with wind
-*  3D without wind
-*  3D with wind
-*  3D with strong wind
+* 2D with wind
+* 3D without wind
+* 3D with wind
+* 3D with strong wind
 
-### Information at each shoot
+### Information Required for Each Throw
 
-Each round, the actual player provide 3 information for modes without wind : 
-* the dart speed in meter/sec
-* the alpha angle in degre
-* the initial height of the launch in meter
+For modes without wind, each player must provide 3 inputs:
+* Dart speed in meters/second
+* Alpha angle in degrees
+* Initial launch height in meters
 
-And he provide 5 information for modes with wind : 
-* the dart speed in meter/sec
-* the alpha angle in degre
-* the phi angle in degre
-* his distance from the launch line in meter
-* the initial height of the launch in meter
-### Wind informations
+For modes with wind, each player must provide 5 inputs:
+* Dart speed in meters/second
+* Alpha angle in degrees
+* Phi angle in degrees
+* Distance from the launch line in meters
+* Initial launch height in meters
 
-The wind can be generated in every direction with a speed between 0 and 24 for normal wind modes and between 0 and 40 for strong wind mode.
+### Wind Information
 
-### Graphics explainations
+Wind can be generated in any direction with a speed between:
+* 0 and 24 for normal wind modes
+* 0 and 40 for strong wind mode
 
-The left target represent a side view of the shot. 
+### Graphics Explanation
 
-The right target represent the front view of the shot.
+Left target: represents a side view of the shot
 
-The color bar represent the streinght of the wind :
-- Green :   0 < wind streinght < 8
-- Orange :  8 < wind streinght < 16
-- Red :    16 < wind streinght 
+Right target: represents the front view of the shot
 
-# Installation
-You need to install SFML 3.0 : https://www.sfml-dev.org/fr/download/sfml/3.0.0/
+The color bar represents the strength of the wind:
+- Green: 0 < wind strength < 8
+- Orange: 8 < wind strength < 16
+- Red: 16 < wind strength
 
-This game was only tested on Visual Studio Code with gcc compiler and SFML 3.0 configured.
+## Installation
+
+You need to install SFML 3.0: https://www.sfml-dev.org/download/sfml/3.0.0/
+
+This game was only tested on Visual Studio Code with the GCC compiler and SFML 3.0 configured.
 
 For compiling, you need to open all files in tabs on your code software and then compile the main.cpp file.
 
-# Roadmap
-- Q3 2025 : use more than 2 players and choose their names
-- Q4 2025 : input everything directly on the graphic window and hide the commande terminal
-- Q1 2026 : add the looses caused by the air around the dart
+## Roadmap
 
-# User licence
+- Q3 2025: Support for more than 2 players and customizable player names
+- Q4 2025: Direct input through the graphic window and hiding of command terminal
+- Q1 2026: Add air resistance effects on dart trajectory
 
-Every one can use, modify and share my code.
+## User License
 
-Contributors name should be credited
+Anyone can use, modify, and share this code.
+Contributors' names should be credited.
 
-# Credits
+## Credits
 
 ### Contributors
-retasquid / Noé Dargaud : code and readme
-Alan2005-code / Alan Bayt : project document and readme introduction
+- retasquid / Noé Dargaud: code and readme
+- Alan2005-code / Alan Bayt: project documentation and readme introduction
 
-### helps
-Claude AI : code correction and function utilisation examples
-YouTube @MesosAurum : SFML 3.0 tutorials
+### Acknowledgements
+- Claude AI: code correction and function usage examples
+- YouTube @MesosAurum: SFML 3.0 tutorials
