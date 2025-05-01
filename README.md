@@ -55,7 +55,23 @@ You need to install SFML 3.0: https://www.sfml-dev.org/download/sfml/3.0.0/
 This game was only tested on Visual Studio Code with the GCC compiler and SFML 3.0 configured.
 
 For compiling, you need to open all files in tabs on your code software and then compile the main.cpp file.
+You also need to replace the library path in your "args" section of task.json file on VScode :
 
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-I",
+                "C:\\your_path\\SFML-3.0.0\\include",
+                "-L",
+                "C:\\your_path\\SFML-3.0.0\\lib",
+                "-lsfml-graphics",
+                "-lsfml-window",
+                "-lsfml-system"
+            ],
+            
 ## Roadmap
 
 - Q3 2025: Support for more than 2 players and customizable player names
