@@ -86,8 +86,8 @@ Contributors' names should be credited.
 ## Credits
 
 ### Contributors
-- retasquid / Noé Dargaud: code and readme
-- Alan2005-code / Alan Bayt: project documentation and readme introduction
+- retasquid / Noé Dargaud: all the code and  the readme
+- Alan2005-code / Alan Bayt: project introduction
 
 ### Acknowledgements
 - Claude AI: code correction and function usage examples
