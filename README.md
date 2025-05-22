@@ -1,10 +1,10 @@
 # Darts Game Project
 
-Our project consists of developing a program capable of simulating dart throws and determining the landing position of darts on a target, based on various conditions such as initial velocity, vertical and horizontal angles, as well as the respective positions of the player and the target. The objective is to perform all necessary calculations to simulate the dart's path and, eventually, to use interfaces such as Dart Simulator to visualize the dart trajectories.
+Our project consists of developing a program capable of simulating dart throws and determining the landing positions of darts on a target, based on various conditions such as initial velocity, vertical and horizontal angles, as well as the respective positions of the player and the target. The objective is to perform all necessary calculations to simulate the dart's path and eventually use interfaces such as Dart Simulator to visualize the dart trajectories.
 
 ## Tools
 
-For this purpose, we have chosen to use the C++ programming language and the SFML 3.0 library. Additionally, for collaborative project management, we have used GitHub, which allows multiple developers to work simultaneously on the code, modify it, and share updates with other team members.
+For this purpose, we have chosen to use the C++ programming language along with the SFML 3.0 library. Additionally, for collaborative project management, we have used GitHub, which allows multiple developers to work simultaneously on the code, make modifications, and share updates with other team members.
 
 ## How to Use
 
@@ -74,9 +74,9 @@ You also need to replace the library path in your "args" section of task.json fi
             
 ## Roadmap
 
-- Q3 2025: Support for more than 2 players and customizable player names
-- Q4 2025: Direct input through the graphic window and hiding of command terminal
-- Q1 2026: Add air resistance effects on dart trajectory
+- Q3 2025: Support for more than two players and customizable player names
+- Q4 2025: Direct input via the graphical window and suppression of the command terminal
+- Q1 2026: Implementation of air resistance effects on dart trajectories
 
 ## User License
 
